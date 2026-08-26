@@ -1,0 +1,23 @@
+name: CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+  
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/Checkout@v4
+      - name: Config Node.js
+        uses: actions/setup-Node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      - name: Install dependencies (los pollitos)
+        run: npm Install
+      - name: Compile project
+        run: npm run build
