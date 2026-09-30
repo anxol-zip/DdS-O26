@@ -182,3 +182,17 @@
     border-right-color: var(--border);
   }
 }
+
+.button-row {
+  display: flex;          /* Coloca los elementos hijos en fila */
+  gap: 1000px;              /* Espacio de separación entre los botones */
+  justify-content: center;/* Opcional: 'center' para centrar, 'flex-start' para izquierda */
+}
+
+.counter + .counter {
+    margin-left: 15px; /* Separa este botón del que tiene a su izquierda */
+  }
+
+.button + .button {
+    margin-left: 15px; /* Separa este botón del que tiene a su izquierda */
+  }
