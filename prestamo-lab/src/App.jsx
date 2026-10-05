@@ -1,76 +1,47 @@
 import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
 import './App.css'
 import Catalog from './components/Catalog'
+import Request from './components/Request'
+import { items } from './data/items'
 
 function App() {
-  const total = 5
-  const [available, setAvailable] = useState(total)
+  // Estado de la solicitud: un array con los id's de los equipos elegidos.
+  // Vive en App porque tanto Catalog (agrega) como Request (quita) lo necesitan.
+  const [request, setRequest] = useState([])
 
-  {/* 
-  function borrowM() {
-    setAvailable((d) => (d > 0 ? d-1 : d))
+  // Función para agregar un equipo a la solicitud
+  function add(id) {
+    // If anidado: si el id ya está en la solicitud, no hacer nada
+    if (request.includes(id)) return
+
+    // Agregar el id a la solicitud
+    setRequest([...request, id])
+    // Los 3 puntos (...) son el operador de propagación (spread operator) que permite crear un nuevo array con los elementos del array original
+    // y el nuevo elemento agregado al final.
   }
 
-  function returnM() {
-    setAvailable((d) => (d < total ? d + 1 : d))
+  // Función para quitar un equipo de la solicitud
+  function remove(id) {
+    // Filtrar la solicitud para eliminar el id
+    // La función flecha compara cada elemento que hay con el id a eliminar
+    setRequest(request.filter((reqId) => reqId !== id))
   }
-  */}
-
-  const [count, setCount] = useState(67)
 
   return (
     <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Mi app número 5 (creo) con react y vite 😎</h1>
-          <p>
-            Autor: Angel Rugerio
-          </p>
-          <h2> Contador: {count}</h2>
-        </div>
-        <div classname="button-row">
-          <button
-            type="button"
-            className="counter"
-            onClick={() => setCount((count) => count + 1)}
-          >
-            Sum 1 to count
-          </button>
-          <button
-            type="button"
-            className="counter"
-            onClick={() => setCount((count) => count - 1)}
-          >
-            Rest 1 to count
-          </button>
-        </div>
+      <header>
+        <h1> Laboratorio - prestamos </h1>
+        <p> Autor: Angel Rugerio</p>
+      </header>
 
-        <main>
-          <h2> Disponibles: {available} </h2>
-          <h2> Respberry Pi 5</h2>
-          <p> {available} de {total} disponibles. </p>
-          {/* 
-          <div classname="button-row">
-            <button type="button" className="button" onClick={borrowM} disabled={available === 0}>
-              Prestar
-            </button>
-            <button type="button" className="button" onClick={returnM} disabled={available === total}>
-              Devolver
-            </button>
-          </div> 
-          */}
-          <h1> Laboratorio - prestamos </h1>
-          <Catalog gears = {gears} />
-        </main>
-      </section>
+      <main>
+        {/* Renderizar los componentes Request y Catalog, pasando las props
+        necesarias. onRemove y onAdd son funciones que se pasan como props para
+        que los componentes hijos puedan llamar a estas funciones y modificar el
+        estado del componente padre (App) */}
+        <Request request={request} items={items} onRemove={remove} />
+        <Catalog items={items} request={request} onAdd={add} />
+      </main>
     </>
   )
 }

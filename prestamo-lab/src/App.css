@@ -184,15 +184,29 @@
 }
 
 .button-row {
-  display: flex;          /* Coloca los elementos hijos en fila */
-  gap: 1000px;              /* Espacio de separación entre los botones */
-  justify-content: center;/* Opcional: 'center' para centrar, 'flex-start' para izquierda */
+  display: flex; /* Coloca los elementos hijos en fila */
+  gap: 50px; /* Espacio de separación entre los botones */
+  justify-content: center; /* Opcional: 'center' para centrar, 'flex-start' para izquierda */
 }
 
-.counter + .counter {
-    margin-left: 15px; /* Separa este botón del que tiene a su izquierda */
+.list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.card {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+
+  h3 {
+    color: var(--text-h);
+    margin: 0 0 8px;
   }
 
-.button + .button {
-    margin-left: 15px; /* Separa este botón del que tiene a su izquierda */
+  button {
+    margin-top: 12px;
   }
+}
