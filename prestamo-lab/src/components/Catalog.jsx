@@ -26,7 +26,7 @@ function Catalog({ items, request, onAdd }) {
     <section>
       <h2> Catálogo </h2>
       <p>
-        {totalAvailable} de {items.length} equipos disponibles.
+        {totalAvailable} de {items.length} productos disponibles.
       </p>
 
       {/* Inputs controlados: su valor viene del estado (value / checked) y cada

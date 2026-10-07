@@ -7,6 +7,8 @@ import { items } from './data/items'
 function App() {
   // Estado de la solicitud: un array con los id's de los equipos elegidos.
   // Vive en App porque tanto Catalog (agrega) como Request (quita) lo necesitan.
+  // "useState" es un elemento de React que permite crear un estado en un componente funcional.
+  // Devuelve un array con dos elementos: el valor actual del estado y una función para actualizarlo.
   const [request, setRequest] = useState([])
 
   // Función para agregar un equipo a la solicitud
