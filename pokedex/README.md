@@ -1,16 +1,34 @@
-# React + Vite
+# DdS_026_Pokedex
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Pokédex en React + Vite que consume la [PokéAPI](https://pokeapi.co/). Proyecto de clase de
+**Diseño de Software** · Otoño 2026 · Angel Rugerio Jiménez (201720).
 
-Currently, two official plugins are available:
+## Qué hace
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Muestra una cuadrícula de 25 Pokémon por página (imagen oficial, número, nombre, tipos, altura y
+  peso), paginada con `limit`/`offset` dentro del rango #1–#1025.
+- Busca un Pokémon por su nombre exacto (todavía no por id ni por parte del nombre).
+- Arma un equipo de hasta 6 Pokémon sin repetir: botón "Agregar" en cada tarjeta y "Eliminar" en
+  las del equipo. Los que ya están en el equipo se marcan con borde verde.
+- Guarda el equipo en Firestore (colección `team`, un documento por id) y lo recupera al abrir la app.
 
-## React Compiler
+## Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+| Componente   | Tecnología                                            |
+| ------------ | ----------------------------------------------------- |
+| UI           | React 19, Vite 8                                      |
+| Datos        | PokéAPI (`fetch`)                                     |
+| Persistencia | Firebase Firestore (`setDoc`, `deleteDoc`, `getDocs`) |
 
-## Expanding the ESLint configuration
+## Correr el proyecto
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```bash
+npm install
+cp .env.example .env   # llenar con las credenciales del proyecto de Firebase
+npm run dev
+```
+
+## Estado
+
+En desarrollo (branch `develop`). El equipo sale en el orden de los documentos de Firestore, no en
+el orden en que se agregaron.

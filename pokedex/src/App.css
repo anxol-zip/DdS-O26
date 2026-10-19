@@ -1,184 +1,200 @@
-.counter {
-  font-size: 16px;
-  padding: 5px 10px;
-  border-radius: 5px;
-  color: var(--accent);
-  background: var(--accent-bg);
-  border: 2px solid transparent;
-  transition: border-color 0.3s;
-  margin-bottom: 24px;
-
-  &:hover {
-    border-color: var(--accent-border);
-  }
-  &:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 2px;
-  }
+/* ===== Variables: valores que se repiten en todo el diseño ===== */
+:root {
+  --text-light: #fff;
+  --text-error: #ffb3b3;
+  /* Glassmorphism: fondo semitransparente + blur + borde claro */
+  --glass-bg: rgba(255, 255, 255, 0.12);
+  --glass-bg-strong: rgba(255, 255, 255, 0.2);
+  --glass-border: rgba(255, 255, 255, 0.25);
+  --glass-blur: blur(14px);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+  --in-team-border: rgba(120, 255, 170, 0.7);
+  --remove-bg: rgba(255, 107, 107, 0.25);
 }
 
-.hero {
-  position: relative;
+/* ===== Base ===== */
 
-  .base,
-  .framework,
-  .vite {
-    inset-inline: 0;
-    margin: 0 auto;
-  }
-
-  .base {
-    width: 170px;
-    position: relative;
-    z-index: 0;
-  }
-
-  .framework,
-  .vite {
-    position: absolute;
-  }
-
-  .framework {
-    z-index: 1;
-    top: 34px;
-    height: 28px;
-    transform: perspective(2000px) rotateZ(300deg) rotateX(44deg) rotateY(39deg)
-      scale(1.4);
-  }
-
-  .vite {
-    z-index: 0;
-    top: 107px;
-    height: 26px;
-    width: auto;
-    transform: perspective(2000px) rotateZ(300deg) rotateX(40deg) rotateY(39deg)
-      scale(0.8);
-  }
+/* Fondo con color para que el efecto de vidrio se note */
+body {
+  background:
+    radial-gradient(circle at 20% 20%, #ff6b6b 0, transparent 40%),
+    radial-gradient(circle at 80% 30%, #4facfe 0, transparent 40%),
+    radial-gradient(circle at 50% 90%, #a66cff 0, transparent 45%), #1b1b2f;
+  background-attachment: fixed;
 }
 
-#center {
+/* Títulos en blanco para que contrasten con el fondo oscuro */
+h1,
+h2 {
+  color: var(--text-light);
+}
+
+/* ===== Vidrio compartido: tarjetas, botones e input ===== */
+.card,
+.nav-btn,
+.search input {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+}
+
+/* ===== Barra de búsqueda: input y botones en una fila ===== */
+.search {
   display: flex;
-  flex-direction: column;
-  gap: 25px;
-  place-content: center;
-  place-items: center;
-  flex-grow: 1;
-
-  @media (max-width: 1024px) {
-    padding: 32px 20px 24px;
-    gap: 18px;
-  }
+  justify-content: center;
+  gap: 12px;
+  margin: 0 16px 24px;
 }
 
-#next-steps {
+.search input {
+  width: 280px;
+  padding: 12px 16px;
+  border-radius: 16px;
+  color: var(--text-light);
+  font: inherit;
+}
+
+.search input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* ===== Mensajes de estado ===== */
+
+/* "Cargando..." */
+.status {
+  color: var(--text-light);
+}
+
+/* Mensaje de error: rojo claro */
+.error {
+  color: var(--text-error);
+}
+
+/* ===== Equipo (arriba) y cuadrícula de 25 (abajo) ===== */
+.team {
+  margin: 40px 16px;
+  color: var(--text-light);
+}
+
+/* Cuadrícula de 3 columnas para los 6 del equipo */
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 16px;
+}
+
+/* Cuadrícula de 25: tantas columnas como quepan, cada una de mínimo 180px */
+.pokemon-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 16px;
+  margin: 0 16px;
+}
+
+/* Tarjetas compactas en las dos cuadrículas */
+.team-grid .card,
+.pokemon-grid .card {
+  padding: 16px;
+}
+
+/* Imagen más chica: el CSS gana sobre el atributo width="200" del <img> */
+.team-grid img,
+.pokemon-grid img {
+  width: 120px;
+  height: auto;
+}
+
+/* Nombre más pequeño en la cuadrícula de 25 */
+.pokemon-grid h2 {
+  font-size: 17px;
+}
+
+/* ===== Paginación: botones a los lados y el número de página al centro ===== */
+.pagination {
   display: flex;
-  border-top: 1px solid var(--border);
-  text-align: left;
-
-  & > div {
-    flex: 1 1 0;
-    padding: 32px;
-    @media (max-width: 1024px) {
-      padding: 24px 20px;
-    }
-  }
-
-  .icon {
-    margin-bottom: 16px;
-    width: 22px;
-    height: 22px;
-  }
-
-  @media (max-width: 1024px) {
-    flex-direction: column;
-    text-align: center;
-  }
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  margin: 24px 0;
+  color: var(--text-light);
 }
 
-#docs {
-  border-right: 1px solid var(--border);
-
-  @media (max-width: 1024px) {
-    border-right: none;
-    border-bottom: 1px solid var(--border);
-  }
+/* ===== Tarjeta de Pokémon ===== */
+.card {
+  border-radius: 24px;
+  padding: 24px 32px;
+  color: var(--text-light);
 }
 
-#next-steps ul {
+/* Nombre con la primera letra en mayúscula */
+.card h2 {
+  text-transform: capitalize;
+}
+
+/* Sombra para resaltar la imagen */
+.card img {
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.35));
+}
+
+/* Marca de los Pokémon que ya están en el equipo: borde verde */
+.card.in-team {
+  border-color: var(--in-team-border);
+}
+
+/* Lista de tipos: sin viñetas, centrada y con espacio entre elementos */
+.types {
   list-style: none;
-  padding: 0;
   display: flex;
+  justify-content: center;
   gap: 8px;
-  margin: 32px 0 0;
-
-  .logo {
-    height: 18px;
-  }
-
-  a {
-    color: var(--text-h);
-    font-size: 16px;
-    border-radius: 6px;
-    background: var(--social-bg);
-    display: flex;
-    padding: 6px 12px;
-    align-items: center;
-    gap: 8px;
-    text-decoration: none;
-    transition: box-shadow 0.3s;
-
-    &:hover {
-      box-shadow: var(--shadow);
-    }
-    .button-icon {
-      height: 18px;
-      width: 18px;
-    }
-  }
-
-  @media (max-width: 1024px) {
-    margin-top: 20px;
-    flex-wrap: wrap;
-    justify-content: center;
-
-    li {
-      flex: 1 1 calc(50% - 8px);
-    }
-
-    a {
-      width: 100%;
-      justify-content: center;
-      box-sizing: border-box;
-    }
-  }
+  padding: 0;
+  margin: 12px 0;
 }
 
-#spacer {
-  height: 88px;
-  border-top: 1px solid var(--border);
-  @media (max-width: 1024px) {
-    height: 48px;
-  }
+/* Cada tipo como pastilla semitransparente */
+.types li {
+  padding: 4px 14px;
+  border-radius: 999px;
+  background: var(--glass-bg-strong);
+  text-transform: capitalize;
+  font-size: 15px;
 }
 
-.ticks {
-  position: relative;
-  width: 100%;
+/* ===== Botones ===== */
 
-  &::before,
-  &::after {
-    content: '';
-    position: absolute;
-    top: -4.5px;
-    border: 5px solid transparent;
-  }
+/* Botones de navegación y búsqueda */
+.nav-btn {
+  color: var(--text-light);
+  font: inherit;
+  padding: 12px 18px;
+  border-radius: 16px;
+  cursor: pointer;
+}
 
-  &::before {
-    left: 0;
-    border-left-color: var(--border);
-  }
-  &::after {
-    right: 0;
-    border-right-color: var(--border);
-  }
+/* Botón de agregar / eliminar dentro de la tarjeta */
+.card-btn {
+  margin-top: 12px;
+  padding: 6px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--glass-border);
+  background: var(--glass-bg-strong);
+  color: var(--text-light);
+  font: inherit;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+/* Botón de eliminar en tono rojizo */
+.card-btn.remove {
+  background: var(--remove-bg);
+}
+
+/* Deshabilitados: primera/última página, ya en el equipo o equipo lleno */
+.nav-btn:disabled,
+.card-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
