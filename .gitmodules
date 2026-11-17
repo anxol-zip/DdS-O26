@@ -1,0 +1,9 @@
+[submodule "DS_O26_Pokedex"]
+	path = DS_O26_Pokedex
+	url = https://github.com/Mozta/DS_O26_Pokedex.git
+[submodule "parcial2-rugerio"]
+	path = parcial2-rugerio
+	url = git@github.com:anxol-zip/parcial2-rugerio.git
+[submodule "pokedex"]
+	path = pokedex
+	url = git@github.com:anxol-zip/DdS_026_Pokedex.git
